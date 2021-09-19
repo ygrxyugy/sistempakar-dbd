@@ -6,7 +6,7 @@
                 <div class="sidebar-brand-icon rotate-n-15">
                     <i class="fas fa-cloud-meatball"></i>
                 </div>
-                <div class="sidebar-brand-text mx-3"> Nama Brand </div>
+                <div class="sidebar-brand-text mx-3"> HeartBreak </div>
             </a>
 
             <!-- Divider -->

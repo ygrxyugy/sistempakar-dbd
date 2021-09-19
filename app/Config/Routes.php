@@ -34,6 +34,8 @@ $routes->setAutoRoute(true);
 
 // ketika ada akses yg metode request-nya 'get' / '(ketika mengetikkan sesuatu di URL)'
 // alamatnya adalah '/' (root/baseURL) arahkan ke controller Home, lalu methodnya index
+$routes->get('/', 'Auth::index');
+
 $routes->get('login', 'Auth::login');
 $routes->get('register', 'Auth::register');
 
