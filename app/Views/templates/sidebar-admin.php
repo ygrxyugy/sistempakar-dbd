@@ -13,7 +13,7 @@
             <hr class="sidebar-divider my-0">
 
             <!-- Nav Item - Dashboard -->
-            <li class="nav-item active">
+            <li class="nav-item <?= ($title === "Admin Dashboard") ? 'active' : '' ; ?>">
                 <a class="nav-link" href=" <?= base_url('admin');?>">
                     <i class="fas fa-fw fa-tachometer-alt"></i>
                     <span>Dashboard</span></a>
@@ -23,7 +23,7 @@
             <hr class="sidebar-divider">
 
             <!-- Data Pengguna -->
-            <li class="nav-item">
+            <li class="nav-item <?= ($title === "Data Pengguna") ? 'active' : '' ; ?>">
                 <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
                     <i class="fas fa-fw fa-users"></i>
                     <span>Data Pengguna</span>
@@ -40,7 +40,7 @@
             <hr class="sidebar-divider">
 
             <!-- Data Gejala -->
-            <li class="nav-item">
+            <li class="nav-item <?= ($title === "Data Gejala") ? 'active' : '' ; ?>">
                 <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities" aria-expanded="true" aria-controls="collapseUtilities">
                     <i class="fas fa-fw fa-list"></i>
                     <span>Data Gejala</span>
@@ -57,19 +57,11 @@
             <hr class="sidebar-divider">
             
             <!-- Data Penyakit -->
-            <li class="nav-item">
-                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages"
-                aria-expanded="true" aria-controls="collapsePages">
-                <i class="fas fa-fw fa-stethoscope"></i>
-                <span>Data Penyakit</span>
-            </a>
-            <div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
-                <div class="bg-white py-2 collapse-inner rounded">
-                    <a class="collapse-item" href="#">Tambah Penyakit Baru</a>
-                    <a class="collapse-item" href="<?= base_url('admin/data-penyakit');?>">Daftar Penyakit</a>
-                </div>
-            </div>
-        </li>
+            <li class="nav-item <?= ($title === "Data Pemeriksaan") ? 'active' : '' ; ?>">
+                <a class="nav-link" href=" <?= base_url('admin/history');?>">
+                    <i class="fas fa-fw fa-stethoscope"></i>
+                    <span>Data Pemeriksaan</span></a>
+            </li>
         
         <!-- Divider -->
         <hr class="sidebar-divider">

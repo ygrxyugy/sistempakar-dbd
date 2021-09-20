@@ -3,16 +3,8 @@
 
     <!-- Page Heading -->
     <h1 class="h3 mb-2 text-gray-800"><?= $title; ?></h1>
-    <!-- DataTales Example -->
-    <?php if(session()->getFlashdata('msg')): ?>
-    <div class="alert alert-success alert-dismissible fade show" role="alert">
-    <?= session()->getFlashdata('msg'); ?>
-        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-        </button>
-    </div>
-    <?php endif; ?>
 
+    <!-- DataTales Example -->
     <div class="card shadow mb-4">
         <div class="card-body">
             <div class="table-responsive">
@@ -20,6 +12,7 @@
                     <thead>
                         <tr>
                             <th>No</th>
+                            <th>Nama</th>
                             <th>Gejala</th>
                             <th>Indikasi Penyakit</th>
                             <th>Waktu Pemeriksaan</th>
@@ -31,6 +24,7 @@
                         <tr>
                             <?php if(!empty($hs)): ?>
                                 <td><?= $i++;; ?></td>
+                                <td><?= $hs['nama']; ?></td>
                                 <td><?= $hs['gejala']; ?></td>
                                 <td><?= $hs['penyakit']; ?></td>
                                 <td><?= $hs['created_at']; ?></td>

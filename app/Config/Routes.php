@@ -42,12 +42,14 @@ $routes->get('register', 'Auth::register');
 $routes->get('admin', 'Admin::index');
 $routes->get('admin/data-user', 'Admin::dataUser');
 $routes->get('admin/data-gejala', 'Admin::dataGejala');
-$routes->get('admin/data-penyakit', 'Admin::dataPenyakit');
+$routes->get('admin/history', 'Admin::history');
 
 $routes->get('user', 'User::index');
 $routes->get('user/profile', 'User::profile');
 $routes->get('user/survey', 'User::survey');
 $routes->get('user/history', 'User::history');
+
+$routes->post('user/survey/save', 'User::save');
 
 /*
  * --------------------------------------------------------------------

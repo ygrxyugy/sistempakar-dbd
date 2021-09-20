@@ -2,17 +2,76 @@
 <div class="container-fluid">
 
     <!-- Page Heading -->
-    <h1 class="h3 mb-2 text-gray-800">Cek Kesehatan</h1>
-    <p class="mb-4">Selamat datang di halaman cek kesehatan</p>
-    <p class="mb-4">Silahkan klik tombol di bawah ini untuk memulai</p>
-    <button class="btn btn-primary bg-gradient-primary btnMulai" name="btnMulai">Mulai</button>
-    <form action="">
-        <h4>Apa anda mengalami sesak napas?</h4>
-        <div class="">
-            <button class="btn btn-success">Ya</button>
-            <button class="btn btn-danger">Tidak</button>
+    <h1 class="h3 mb-2 text-gray-800"><?= $title; ?></h1>
+        <?php 
+            if (isset($msg)){
+                echo $msg;
+            }
+        ?>
+    <div class="row justify-content-center mt-5">
+        <div class="col-sm-6 text-center">
+            <button class="btn btn-primary bg-gradient-primary btnMulai" name="btnMulai">Mulai</button>
+            <form action="/user/survey/save" method="POST" class="formSurvey text-left d-none">
+                <?= csrf_field(); ?>
+                <h5><strong>Pilih gejala yang anda rasakan</strong></h5>
+                <div class="form-group">
+                    <label for="gejala1">Gejala 1</label>
+                    <select class="form-control" name="gejala1" id="gejala1">
+                    <option value="null">Tidak Ada</option>
+                    <?php 
+                    $i=0;
+                    foreach ($gejala['gejala'] as $gj): 
+                        $i++;
+                    ?>
+                        <option value="<?= $gj['gejala1']; ?>"><?= $gj['gejala1']; ?></option>
+                    <?php endforeach; ?>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="gejala2">Gejala 2</label>
+                    <select class="form-control" name="gejala2" id="gejala2">
+                    <option value="null">Tidak Ada</option>
+                    <?php 
+                    $i=0;
+                    foreach ($gejala['gejala'] as $gj): 
+                        $i++;
+                    ?>
+                        <option value="<?= $gj['gejala2']; ?>"><?= $gj['gejala2']; ?></option>
+                    <?php endforeach; ?>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="gejala3">Gejala 3</label>
+                    <select class="form-control" name="gejala3" id="gejala3">
+                    <option value="null">Tidak Ada</option>
+                    <?php 
+                    $i=0;
+                    foreach ($gejala['gejala'] as $gj): 
+                        $i++;
+                    ?>
+                        <option value="<?= $gj['gejala3']; ?>"><?= $gj['gejala3']; ?></option>
+                    <?php endforeach; ?>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="gejala4">Gejala 4</label>
+                    <select class="form-control" name="gejala4" id="gejala4">
+                    <option value="null">Tidak Ada</option>
+                    <?php 
+                    $i=0;
+                    foreach ($gejala['gejala'] as $gj): 
+                        $i++;
+                    ?>
+                        <option value="<?= $gj['gejala4']; ?>"><?= $gj['gejala4']; ?></option>
+                    <?php endforeach; ?>
+                    </select>
+                </div>
+                <div class="mt-2">
+                    <button type="submit" class="btn btn-primary" name="namaUser" value="Budi">Submit</button>
+                </div>
+            </form>
         </div>
-    </form>
+    </div>
 
 
 </div>

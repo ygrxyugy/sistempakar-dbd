@@ -2,6 +2,9 @@
 
 namespace App\Controllers;
 
+use App\Models\Survey;
+use App\Models\Gejala;
+
 class User extends BaseController
 {
     public function index()
@@ -37,8 +40,10 @@ class User extends BaseController
 
     public function survey()
     {
+        $dataGejala = $this->gejala();
         $data=[
-            'title'=>'Cek Kesehatan'
+            'title'=>'Cek Kesehatan',
+            'gejala' => $dataGejala,
         ];
 
         echo view('templates/header', $data);
@@ -51,10 +56,11 @@ class User extends BaseController
     }
     public function history()
     {
+        $dataHistory = $this->historyModel();
         $data=[
-            'title'=>'Riwayat Pemeriksaan'
+            'title'=>'Riwayat Pemeriksaan',
+            'history' => $dataHistory,
         ];
-
         echo view('templates/header', $data);
         echo view('templates/sidebar-user');
         echo view('templates/topbar');
@@ -62,5 +68,47 @@ class User extends BaseController
         echo view('user/history');
         
         echo view('templates/footer');
+    }
+
+    public function save(){
+        $cek = $this->request->getVar();
+        $dataGejala = $this->gejalaModel->findAll(); 
+        foreach ($dataGejala as $gj) {
+            if($cek['gejala1'] == $gj['gejala1']){
+                if($cek['gejala2'] == $gj['gejala2']){
+                    if($cek['gejala3'] == $gj['gejala3']){
+                        if($cek['gejala4'] == $gj['gejala4']){
+                             $hasil = $gj['penyakit'];  
+                             $gejalaUser = ($cek['gejala1']. ", " . $cek['gejala2']. ", " . $cek['gejala3']. ", " . $cek['gejala4']);
+                        }            
+                        elseif ($cek['gejala4']=='null') {
+                            $hasil = $gj['penyakit'];
+                            $gejalaUser = ($cek['gejala1']. ", " . $cek['gejala2']. ", " . $cek['gejala3']);
+                        }
+                    }        
+                    elseif ($cek['gejala3']=='null') {
+                        $hasil = $gj['penyakit'];
+                        $gejalaUser = ($cek['gejala1']. ", " . $cek['gejala2']);
+                    }
+                }                    
+                elseif ($cek['gejala2']=='null') {
+                    $hasil = $gj['penyakit'];
+                    $gejalaUser = ($cek['gejala1']);
+                }
+            }
+        }
+        if ($cek['gejala1']=='null') {
+            $hasil = 'Tidak terindikasi';
+            $gejalaUser = 'Tidak ada';
+        }
+
+        $this->historyModel->save([
+            'nama' =>$this->request->getVar('namaUser'),
+            'gejala' => $gejalaUser,
+            'penyakit' => $hasil
+        ]);
+        
+        session()->setFlashdata('msg','Cek kesehatan telah selesai!');
+        return redirect('user/history');
     }
 }

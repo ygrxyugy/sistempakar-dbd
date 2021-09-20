@@ -3,7 +3,7 @@
 
     <!-- Content Row -->
     <div class="row">
-    <h5>Profile User</h5>
+    <h1 class="h3 mb-2 text-gray-800"><?= $title; ?></h1>
 
     </div>
 
