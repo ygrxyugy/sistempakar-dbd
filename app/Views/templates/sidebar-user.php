@@ -1,4 +1,3 @@
-
         <!-- Sidebar -->
         <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
 
@@ -14,7 +13,7 @@
             <hr class="sidebar-divider my-0">
 
             <!-- Nav Item - Dashboard -->
-            <li class="nav-item active">
+            <li class="nav-item <?= ($title === "User Dashboard") ? 'active' : '' ; ?>">
                 <a class="nav-link" href=" <?= base_url('user');?>">
                     <i class="fas fa-fw fa-tachometer-alt"></i>
                     <span>Dashboard</span></a>
@@ -24,7 +23,7 @@
             <hr class="sidebar-divider">
 
             <!-- Data Pengguna -->
-            <li class="nav-item">
+            <li class="nav-item <?= ($title === "Profile") ? 'active' : '' ; ?>">
                 <a class="nav-link" href=" <?= base_url('user/profile');?>">
                     <i class="fas fa-fw fa-tachometer-alt"></i>
                     <span>Profil</span>
@@ -35,7 +34,7 @@
             <hr class="sidebar-divider">            
             <!-- Data Pengguna -->
 
-            <li class="nav-item">
+            <li class="nav-item <?= ($title === "Cek Kesehatan") ? 'active' : '' ; ?>">
                 <a class="nav-link" href=" <?= base_url('user/survey');?>">
                     <i class="fas fa-fw fa-tachometer-alt"></i>
                     <span>Cek Kesehatan</span>
@@ -46,7 +45,7 @@
             <hr class="sidebar-divider">
             
             <!-- Data Pengguna -->
-            <li class="nav-item">
+            <li class="nav-item <?= ($title === "Riwayat Pemeriksaan") ? 'active' : '' ; ?>">
                 <a class="nav-link" href=" <?= base_url('user/history');?>">
                     <i class="fas fa-fw fa-tachometer-alt"></i>
                     <span>Riwayat Pemeriksaan</span>

@@ -6,10 +6,13 @@ class Admin extends BaseController
 {
     public function index()
     {
+        $dataHistory = $this->historyModel();
+        $dataGejala = $this->gejala();
         $data=[
-            'title'=>'Admin Dashboard'
-        ];
-
+            'title'=>'Admin Dashboard',
+            'gejala' => $dataGejala,
+            'history' => $dataHistory
+        ];   
         echo view('templates/header', $data);
         echo view('templates/sidebar-admin');
         echo view('templates/topbar');
@@ -34,8 +37,10 @@ class Admin extends BaseController
 
     public function dataGejala()
     {
+        $dataGejala = $this->gejala();
         $data=[
-            'title'=>'Data Gejala'
+            'title'=>'Data Gejala',
+            'gejala' => $dataGejala
         ];
         echo view('templates/header', $data);
         echo view('templates/sidebar-admin');
@@ -43,15 +48,18 @@ class Admin extends BaseController
         echo view('admin/data-gejala');     
         echo view('templates/footer');
     }
-    public function dataPenyakit()
+    public function history()
     {
+        $dataHistory = $this->historyModel();
         $data=[
-            'title'=>'Data Penyakit'
+            'title'=>'Data Pemeriksaan',
+            'history' => $dataHistory
         ];
+
         echo view('templates/header', $data);
         echo view('templates/sidebar-admin');
         echo view('templates/topbar');
-        echo view('admin/data-penyakit');    
+        echo view('admin/history-admin');    
         echo view('templates/footer');
     }
 }

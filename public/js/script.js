@@ -1,14 +1,11 @@
 const btnMulai = document.querySelector('.btnMulai');
+const formSurvey = document.querySelector('.formSurvey');
 
 $('.btnMulai').click(function () {
-  nextBtn.classList.toggle('d-none');
+  formSurvey.classList.toggle('d-none');
+  btnMulai.classList.toggle('d-none');
 });
-$('.btn-tutup').click(function () {
-  $('.msg').hide(function () {
-    btnTutup.classList.toggle('d-none');
-    btnAddData.classList.toggle('d-none');
-  });
-});
+
 $(function () {
   $('.btnDetail').on('click', function () {
     const id = $(this).data('id');
