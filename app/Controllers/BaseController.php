@@ -30,7 +30,7 @@ class BaseController extends Controller
 	 *
 	 * @var array
 	 */
-	protected $helpers = [];
+	protected $helpers = ['auth'];
 
 	/**
 	 * Constructor.
@@ -50,30 +50,34 @@ class BaseController extends Controller
 		// E.g.: $this->session = \Config\Services::session();
 	}
 	protected $surveyModel;
-    protected $gejalaModel;
-    protected $historyModel;
-    public function __construct(){
-        $this-> surveyModel = new Survey();
-        $this-> gejalaModel = new Gejala();
-        $this-> historyModel = new History();
-    }
-	protected function gejala(){
+	protected $gejalaModel;
+	protected $historyModel;
+	public function __construct()
+	{
+		$this->surveyModel = new Survey();
+		$this->gejalaModel = new Gejala();
+		$this->historyModel = new History();
+	}
+	protected function gejala()
+	{
 		$dataGejala = $this->gejalaModel->findAll();
-		$gejala=[
+		$gejala = [
 			'gejala' => $dataGejala
 		];
 		return $gejala;
 	}
-	protected function surveyModel(){
+	protected function surveyModel()
+	{
 		$datasurvey = $this->surveyModel->findAll();
-		$survey=[
+		$survey = [
 			'survey' => $datasurvey
 		];
 		return $survey;
 	}
-	protected function historyModel(){
+	protected function historyModel()
+	{
 		$datahistory = $this->historyModel->findAll();
-		$history=[
+		$history = [
 			'history' => $datahistory
 		];
 		return $history;
