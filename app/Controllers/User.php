@@ -73,6 +73,8 @@ class User extends BaseController
     public function save(){
         $cek = $this->request->getVar();
         $dataGejala = $this->gejalaModel->findAll(); 
+        $gejalaUser='';
+        $hasil='';
         foreach ($dataGejala as $gj) {
             if($cek['gejala1'] == $gj['gejala1']){
                 if($cek['gejala2'] == $gj['gejala2']){
@@ -96,10 +98,14 @@ class User extends BaseController
                     $gejalaUser = ($cek['gejala1']);
                 }
             }
-        }
-        if ($cek['gejala1']=='null') {
-            $hasil = 'Tidak terindikasi';
-            $gejalaUser = 'Tidak ada';
+            elseif ($cek['gejala1']=='null') {
+                $hasil = 'Tidak terindikasi';
+                $gejalaUser = 'Tidak ada';
+            }
+            elseif ($hasil=='') {
+                $hasil = 'Tidak Teridentifikasi';
+                $gejalaUser = ($cek['gejala1']. ", " . $cek['gejala2']. ", " . $cek['gejala3'] . ", " . $cek['gejala4']);
+            }
         }
 
         $this->historyModel->save([
