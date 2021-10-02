@@ -36,15 +36,15 @@ $routes->setAutoRoute(true);
 // alamatnya adalah '/' (root/baseURL) arahkan ke controller Home, lalu methodnya index
 $routes->get('/', 'Home::index');
 
-$routes->get('admin', 'Admin::index');
-$routes->get('admin/data-user', 'Admin::dataUser');
-$routes->get('admin/data-gejala', 'Admin::dataGejala');
-$routes->get('admin/history', 'Admin::history');
+$routes->get('admin', 'Admin::index', ['filter' => 'role:admin']);
+$routes->get('admin/data-user', 'Admin::dataUser', ['filter' => 'role:admin']);
+$routes->get('admin/data-gejala', 'Admin::dataGejala', ['filter' => 'role:admin']);
+$routes->get('admin/history', 'Admin::history', ['filter' => 'role:admin']);
 
-$routes->get('user', 'User::index');
-$routes->get('user/profile', 'User::profile');
-$routes->get('user/survey', 'User::survey');
-$routes->get('user/history', 'User::history');
+$routes->get('user', 'User::index', ['filter' => 'role:member']);
+$routes->get('user/profile', 'User::profile', ['filter' => 'role:member']);
+$routes->get('user/survey', 'User::survey', ['filter' => 'role:member']);
+$routes->get('user/history', 'User::history', ['filter' => 'role:member']);
 
 $routes->post('user/survey/save', 'User::save');
 
