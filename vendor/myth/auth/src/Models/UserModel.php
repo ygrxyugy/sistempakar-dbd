@@ -1,4 +1,6 @@
-<?php namespace Myth\Auth\Models;
+<?php
+
+namespace Myth\Auth\Models;
 
 use CodeIgniter\Model;
 use Myth\Auth\Authorization\GroupModel;
@@ -80,9 +82,9 @@ class UserModel extends Model
      *
      * @return $this
      */
-    public function withGroup(string $groupName)
+    public function withGroup(string $member)
     {
-        $group = $this->db->table('auth_groups')->where('name', $groupName)->get()->getFirstRow();
+        $group = $this->db->table('auth_groups')->where('name', $member)->get()->getFirstRow();
 
         $this->assignGroup = $group->id;
 
@@ -112,13 +114,11 @@ class UserModel extends Model
      */
     protected function addToGroup($data)
     {
-        if (is_numeric($this->assignGroup))
-        {
+        if (is_numeric($this->assignGroup)) {
             $groupModel = model(GroupModel::class);
             $groupModel->addUserToGroup($data['id'], $this->assignGroup);
         }
 
         return $data;
     }
-
 }
