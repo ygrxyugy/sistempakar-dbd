@@ -9,8 +9,13 @@ class User extends BaseController
 {
     public function index()
     {
+        // mengambil data login dari userModel
+        // $dataUser = $this->userModel();
+        // foreach($dataUser['user'] as $user):
+        //     $user['username'];
+        // endforeach;
         $data=[
-            'title'=>'User Dashboard'
+            'title'=>'User Dashboard',
         ];
 
         echo view('templates/header', $data);
