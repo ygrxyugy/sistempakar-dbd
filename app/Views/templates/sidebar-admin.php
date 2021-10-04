@@ -6,7 +6,7 @@
                 <div class="sidebar-brand-icon rotate-n-15">
                     <i class="fas fa-cloud-meatball"></i>
                 </div>
-                <div class="sidebar-brand-text mx-3"> HeartBreak </div>
+                <div class="sidebar-brand-text mx-3"> Heartnalyze </div>
             </a>
 
             <!-- Divider -->
@@ -68,7 +68,7 @@
 
         <!-- Nav Item - Logout -->
         <li class="nav-item">
-          <a class="nav-link" href="<?= base_url('admin');?>">
+          <a class="nav-link" href="<?= base_url('logout');?>">
             <i class="fas fa-fw fa-sign-out-alt"></i>
             <span>Logout</span>
           </a>
