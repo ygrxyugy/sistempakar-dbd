@@ -5,6 +5,7 @@ use CodeIgniter\Session\Session;
 use Myth\Auth\Config\Auth as AuthConfig;
 use Myth\Auth\Entities\User;
 use Myth\Auth\Models\UserModel;
+use App\Models\AuthGroupsUsers;
 
 class AuthController extends Controller
 {
@@ -63,6 +64,7 @@ class AuthController extends Controller
 	 */
 	public function attemptLogin()
 	{
+		$user = new User;
 		$rules = [
 			'login'	=> 'required',
 			'password' => 'required',
@@ -95,9 +97,18 @@ class AuthController extends Controller
 		{
 			return redirect()->to(route_to('reset-password') .'?token='. $this->auth->user()->reset_hash)->withCookies();
 		}
+		$id = $this->auth->user()->id;
+		$cekRole = model(AuthGroupsUsers::class);
+		$roleUser = $cekRole->where('user_id', $id)->first();
 
-		$redirectURL = session('redirect_url') ?? site_url('/');
-		unset($_SESSION['redirect_url']);
+		if ($roleUser['group_id']==1) {
+			$redirectURL = session('admin') ?? site_url('admin');
+			unset($_SESSION['admin']);
+		}
+		if ($roleUser['group_id']==2) {
+			$redirectURL = session('user') ?? site_url('user');
+			unset($_SESSION['user']);
+		}
 
 		return redirect()->to($redirectURL)->withCookies()->with('message', lang('Auth.loginSuccess'));
 	}
@@ -112,7 +123,7 @@ class AuthController extends Controller
 			$this->auth->logout();
 		}
 
-		return redirect()->to(site_url('/'));
+		return redirect()->to(site_url('login'));
 	}
 
 	//--------------------------------------------------------------------
