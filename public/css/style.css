@@ -1,0 +1,12 @@
+
+.jumbotron {
+    background-image: url(img/foto1.png);
+    background-size: cover;
+    height: 540px;
+    text-align: center;
+    position: relative;
+}
+.span {
+    text-align: start;
+}
+/* utility */
