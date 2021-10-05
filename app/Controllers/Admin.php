@@ -8,10 +8,13 @@ class Admin extends BaseController
     {
         $dataHistory = $this->historyModel();
         $dataGejala = $this->gejala();
+        $auth = $this->authService();
+        $dataUser = $this->auth->user();
         $data=[
             'title'=>'Admin Dashboard',
             'gejala' => $dataGejala,
-            'history' => $dataHistory
+            'history' => $dataHistory,
+            'user' => $dataUser->username
         ];   
         echo view('templates/header', $data);
         echo view('templates/sidebar-admin');
@@ -23,8 +26,11 @@ class Admin extends BaseController
 
     public function dataUser()
     {
+        $auth = $this->authService();
+        $dataUser = $this->auth->user();
         $data=[
-            'title'=>'Data Pengguna'
+            'title'=>'Data Pengguna',
+            'user' => $dataUser->username
         ];
         echo view('templates/header', $data);
         echo view('templates/sidebar-admin');
@@ -37,10 +43,13 @@ class Admin extends BaseController
 
     public function dataGejala()
     {
+        $auth = $this->authService();
+        $dataUser = $this->auth->user();
         $dataGejala = $this->gejala();
         $data=[
             'title'=>'Data Gejala',
-            'gejala' => $dataGejala
+            'gejala' => $dataGejala,
+            'user' => $dataUser->username
         ];
         echo view('templates/header', $data);
         echo view('templates/sidebar-admin');
@@ -50,10 +59,13 @@ class Admin extends BaseController
     }
     public function history()
     {
+        $auth = $this->authService();
+        $dataUser = $this->auth->user();
         $dataHistory = $this->historyModel();
         $data=[
             'title'=>'Data Pemeriksaan',
-            'history' => $dataHistory
+            'history' => $dataHistory,
+            'user' => $dataUser->username
         ];
 
         echo view('templates/header', $data);

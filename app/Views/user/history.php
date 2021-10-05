@@ -27,13 +27,15 @@
                     </thead>
                     <tbody>
                         <?php $i=1; ?>
-                        <?php foreach ($history['history'] as $hs): ?>
+                        <?php foreach ($history as $hs): ?>
                         <tr>
                             <?php if(!empty($hs)): ?>
-                                <td><?= $i++;; ?></td>
-                                <td><?= $hs['gejala']; ?></td>
-                                <td><?= $hs['penyakit']; ?></td>
-                                <td><?= $hs['created_at']; ?></td>
+                                <?php if($hs['nama'] == $user):?>
+                                    <td><?= $i++;; ?></td>
+                                    <td><?= $hs['gejala']; ?></td>
+                                    <td><?= $hs['penyakit']; ?></td>
+                                    <td><?= $hs['created_at']; ?></td>
+                                <?php endif; ?>
                             <?php endif; ?>
                         </tr>
                         <?php endforeach; ?>         

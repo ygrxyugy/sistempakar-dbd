@@ -92,4 +92,8 @@ class BaseController extends Controller
 		];
 		return $user;
 	}
+	protected function authService()
+	{
+		$this->auth = service('authentication');
+	}
 }
