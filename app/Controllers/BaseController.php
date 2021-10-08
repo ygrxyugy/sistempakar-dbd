@@ -9,7 +9,6 @@ use Psr\Log\LoggerInterface;
 use App\Models\Survey;
 use App\Models\Gejala;
 use App\Models\History;
-use App\Models\User;
 
 /**
  * Class BaseController
@@ -58,7 +57,6 @@ class BaseController extends Controller
 		$this->surveyModel = new Survey();
 		$this->gejalaModel = new Gejala();
 		$this->historyModel = new History();
-		$this->userModel = new User();
 	}
 	protected function gejala()
 	{
@@ -83,14 +81,6 @@ class BaseController extends Controller
 			'history' => $datahistory
 		];
 		return $history;
-	}
-	protected function userModel()
-	{
-		$dataUser = $this->userModel->findAll();
-		$user = [
-			'user' => $dataUser
-		];
-		return $user;
 	}
 	protected function authService()
 	{
