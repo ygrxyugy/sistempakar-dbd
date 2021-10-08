@@ -12,7 +12,15 @@
                         <div class="col mr-2">
                             <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
                                 Total Pengguna</div>
-                            <div class="h5 mb-0 font-weight-bold text-gray-800">4</div>
+                            <div class="h5 mb-0 font-weight-bold text-gray-800">
+                            <?php
+                            $i=0;
+                                foreach ($AllUser as $All) {
+                                    $i++;
+                                }
+                                echo $i;
+                            ?>
+                            </div>
                         </div>
                         <div class="col-auto">
                             <i class="fas fa-users fa-2x text-gray-300"></i>

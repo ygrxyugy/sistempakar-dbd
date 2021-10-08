@@ -84,14 +84,6 @@ class BaseController extends Controller
 		];
 		return $history;
 	}
-	protected function userModel()
-	{
-		$dataUser = $this->userModel->findAll();
-		$user = [
-			'user' => $dataUser
-		];
-		return $user;
-	}
 	protected function authService()
 	{
 		$this->auth = service('authentication');
