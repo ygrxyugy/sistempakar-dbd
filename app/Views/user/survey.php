@@ -67,7 +67,7 @@
                     </select>
                 </div>
                 <div class="mt-2">
-                    <button type="submit" class="btn btn-primary" name="namaUser" value="Budi">Submit</button>
+                    <button type="submit" class="btn btn-primary" name="namaUser" value="<?= $user; ?>">Submit</button>
                 </div>
             </form>
         </div>

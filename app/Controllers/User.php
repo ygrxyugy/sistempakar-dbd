@@ -9,8 +9,11 @@ class User extends BaseController
 {
     public function index()
     {
+        $auth = $this->authService();
+        $dataUser = $this->auth->user();
         $data=[
-            'title'=>'User Dashboard'
+            'title'=>'User Dashboard',
+            'user' => $dataUser->username
         ];
 
         echo view('templates/header', $data);
@@ -25,8 +28,11 @@ class User extends BaseController
 
     public function profile()
     {
+        $auth = $this->authService();
+        $dataUser = $this->auth->user();
         $data=[
-            'title'=>'Profile'
+            'title'=>'Profile',
+            'user' => $dataUser->username
         ];
 
         echo view('templates/header', $data);
@@ -40,10 +46,13 @@ class User extends BaseController
 
     public function survey()
     {
+        $auth = $this->authService();
+        $dataUser = $this->auth->user();
         $dataGejala = $this->gejala();
         $data=[
             'title'=>'Cek Kesehatan',
             'gejala' => $dataGejala,
+            'user' => $dataUser->username
         ];
 
         echo view('templates/header', $data);
@@ -56,10 +65,13 @@ class User extends BaseController
     }
     public function history()
     {
+        $auth = $this->authService();
+        $dataUser = $this->auth->user();
         $dataHistory = $this->historyModel();
         $data=[
             'title'=>'Riwayat Pemeriksaan',
-            'history' => $dataHistory,
+            'history' => $dataHistory['history'],
+            'user' => $dataUser->username
         ];
         echo view('templates/header', $data);
         echo view('templates/sidebar-user');
@@ -107,13 +119,11 @@ class User extends BaseController
                 $gejalaUser = ($cek['gejala1']. ", " . $cek['gejala2']. ", " . $cek['gejala3'] . ", " . $cek['gejala4']);
             }
         }
-
         $this->historyModel->save([
             'nama' =>$this->request->getVar('namaUser'),
             'gejala' => $gejalaUser,
             'penyakit' => $hasil
         ]);
-        
         session()->setFlashdata('msg','Cek kesehatan telah selesai!');
         return redirect('user/history');
     }
