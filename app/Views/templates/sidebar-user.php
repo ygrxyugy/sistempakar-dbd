@@ -3,7 +3,7 @@
 
             <!-- Sidebar - Brand -->
             <a class="sidebar-brand d-flex align-items-center justify-content-center" href="<?= base_url('user'); ?>">
-                <div class="sidebar-brand-icon rotate-n-15">
+                <div class="sidebar-brand-icon">
                     <img src="/img/logo.jpeg" style="width: 40px; border-radius: 15%;">
                 </div>
                 <div class="sidebar-brand-text mx-3"> Heartnalyze </div>

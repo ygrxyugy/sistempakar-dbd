@@ -82,4 +82,25 @@ class Admin extends BaseController
         echo view('admin/history-admin');    
         echo view('templates/footer');
     }
+    public function tambahGejala()
+    {
+        $auth = $this->authService();
+        $dataUser = $this->auth->user();
+        
+        $data=[
+            'title'=>'Tambah Data Gejala',
+            'user' => $dataUser->username
+        ];
+        echo view('templates/header', $data);
+        echo view('templates/sidebar-admin');
+        echo view('templates/topbar');
+        echo view('admin/tambah-gejala');     
+        echo view('templates/footer');
+    }
+    public function saveTambahGejala(){
+        $data = $this->request->getVar();
+        $dataGejala = $this->gejalaModel->insert($data);
+        session()->setFlashdata('msg','Tambah data gejala berhasil');
+        return redirect('admin/data-gejala');
+    }
 }

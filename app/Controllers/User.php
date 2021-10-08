@@ -11,8 +11,11 @@ class User extends BaseController
     {
         $auth = $this->authService();
         $dataUser = $this->auth->user();
+        $dataGejala = $this->gejala();
+
         $data=[
             'title'=>'User Dashboard',
+            'gejala' => $dataGejala,
             'user' => $dataUser->username
         ];
 
