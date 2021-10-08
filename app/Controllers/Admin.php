@@ -1,19 +1,24 @@
 <?php
 
 namespace App\Controllers;
+use App\Models\User;
 
 class Admin extends BaseController
 {
     public function index()
     {
+        $user = new User;
+
         $dataHistory = $this->historyModel();
         $dataGejala = $this->gejala();
         $auth = $this->authService();
         $dataUser = $this->auth->user();
+        $AllUser = $user->findAll();
         $data=[
             'title'=>'Admin Dashboard',
             'gejala' => $dataGejala,
             'history' => $dataHistory,
+            'AllUser' => $AllUser,
             'user' => $dataUser->username
         ];   
         echo view('templates/header', $data);
@@ -26,11 +31,14 @@ class Admin extends BaseController
 
     public function dataUser()
     {
+        $user = new User;
         $auth = $this->authService();
         $dataUser = $this->auth->user();
+        $AllUser = $user->findAll();
         $data=[
             'title'=>'Data Pengguna',
-            'user' => $dataUser->username
+            'user' => $dataUser->username,
+            'AllUser' => $AllUser 
         ];
         echo view('templates/header', $data);
         echo view('templates/sidebar-admin');
