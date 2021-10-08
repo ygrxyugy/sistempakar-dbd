@@ -44,4 +44,3 @@
 
 </div>
 <!-- /.container-fluid -->
-<?php dd($all); ?>
