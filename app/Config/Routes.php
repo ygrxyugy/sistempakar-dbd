@@ -47,6 +47,7 @@ $routes->get('user', 'User::index', ['filter' => 'role:member']);
 $routes->get('user/profile', 'User::profile', ['filter' => 'role:member']);
 $routes->get('user/survey', 'User::survey', ['filter' => 'role:member']);
 $routes->get('user/history', 'User::history', ['filter' => 'role:member']);
+$routes->post('user/history/getDataKeterangan', 'User::getDataKeterangan', ['filter' => 'role:member']);
 
 $routes->post('user/survey/save', 'User::save');
 

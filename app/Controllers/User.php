@@ -88,6 +88,7 @@ class User extends BaseController
     public function save(){
         $cek = $this->request->getVar();
         $dataGejala = $this->gejalaModel->findAll(); 
+        $keterangan='';
         $gejalaUser='';
         $hasil='';
         foreach ($dataGejala as $gj) {
@@ -95,39 +96,57 @@ class User extends BaseController
                 if($cek['gejala2'] == $gj['gejala2']){
                     if($cek['gejala3'] == $gj['gejala3']){
                         if($cek['gejala4'] == $gj['gejala4']){
-                             $hasil = $gj['penyakit'];  
+                             $hasil = $gj['penyakit'];
+                             $keterangan = $gj['keterangan'];
                              $gejalaUser = ($cek['gejala1']. ", " . $cek['gejala2']. ", " . $cek['gejala3']. ", " . $cek['gejala4']);
                         }            
                         elseif ($cek['gejala4']=='null') {
                             $hasil = $gj['penyakit'];
+                            $keterangan = $gj['keterangan'];
                             $gejalaUser = ($cek['gejala1']. ", " . $cek['gejala2']. ", " . $cek['gejala3']);
                         }
                     }        
                     elseif ($cek['gejala3']=='null') {
                         $hasil = $gj['penyakit'];
+                        $keterangan = $gj['keterangan'];
                         $gejalaUser = ($cek['gejala1']. ", " . $cek['gejala2']);
                     }
                 }                    
                 elseif ($cek['gejala2']=='null') {
                     $hasil = $gj['penyakit'];
+                    $keterangan = $gj['keterangan'];
                     $gejalaUser = ($cek['gejala1']);
                 }
             }
-            elseif ($cek['gejala1']=='null') {
+            elseif ($cek['gejala1'] =='null') {
                 $hasil = 'Tidak terindikasi';
+                $keterangan = 'Anda tidak terindikasi penyakit jantung';
                 $gejalaUser = 'Tidak ada';
             }
             elseif ($hasil=='') {
                 $hasil = 'Tidak Teridentifikasi';
+                $keterangan = 'Penyakit tidak terindentifikasi dalam database kami. Namun, bila sakit berlanjut, harap segera hubungi dokter.';
                 $gejalaUser = ($cek['gejala1']. ", " . $cek['gejala2']. ", " . $cek['gejala3'] . ", " . $cek['gejala4']);
             }
         }
         $this->historyModel->save([
             'nama' =>$this->request->getVar('namaUser'),
             'gejala' => $gejalaUser,
-            'penyakit' => $hasil
+            'penyakit' => $hasil,
+            'keterangan' => $keterangan
         ]);
         session()->setFlashdata('msg','Cek kesehatan telah selesai!');
         return redirect('user/history');
+    }
+
+    public function getDataKeterangan(){
+        $id =  $_POST['id'];
+        $dataHistory = $this->historyModel();
+        foreach ($dataHistory['history'] as $hs) {
+            if ($hs['id'] == $id) {
+                echo json_encode($hs);
+            }
+        }
+    
     }
 }

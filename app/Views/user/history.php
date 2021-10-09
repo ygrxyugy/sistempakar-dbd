@@ -23,7 +23,7 @@
                             <th>Gejala</th>
                             <th>Indikasi Penyakit</th>
                             <th>Waktu Pemeriksaan</th>
-                            <th>Keterangan</th>
+                            <th>Keterangan Penyakit</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -36,7 +36,40 @@
                                     <td><?= $hs['gejala']; ?></td>
                                     <td><?= $hs['penyakit']; ?></td>
                                     <td><?= $hs['created_at']; ?></td>
-                                    <td><?= $hs['keterangan']; ?></td>
+                                    <td>
+                                        <button type="button" class="btn btn-primary tampilModalKeterangan" data-toggle="modal" data-target="#keteranganModal" data-id="<?= $hs['id']; ?>">
+                                        Klik disini
+                                        </button>
+                                        <!-- Modal -->
+                                        <div class="modal fade" id="keteranganModal" tabindex="-1" role="dialog" aria-labelledby="keteranganModalLabel" aria-hidden="true">
+                                        <div class="modal-dialog" role="document">
+                                            <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title" id="keteranganModalLabel">Keterangan Penyakit</h5>
+                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                                </button>
+                                            </div>
+                                            <div class="modal-body">
+                                            <div class="card">
+                                                <h2 class="card-header">
+                                                    <input type="text" readonly class="form-control-plaintext font-weight-bold" id="penyakit">
+                                                </h2>
+                                                <div class="card-body">
+                                                    <div class="form-group">
+                                                        <textarea class="form-control" id="keterangan" name="keterangan" rows="5"></textarea>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
+                                            </div>
+                                            </div>
+                                        </div>
+                                        </div>
+                                    </td>
                                 <?php endif; ?>
                             <?php endif; ?>
                         </tr>
@@ -49,3 +82,5 @@
 
 </div>
 <!-- /.container-fluid -->
+
+<!-- Button trigger modal -->
