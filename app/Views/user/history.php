@@ -23,6 +23,7 @@
                             <th>Gejala</th>
                             <th>Indikasi Penyakit</th>
                             <th>Waktu Pemeriksaan</th>
+                            <th>Keterangan</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -35,6 +36,7 @@
                                     <td><?= $hs['gejala']; ?></td>
                                     <td><?= $hs['penyakit']; ?></td>
                                     <td><?= $hs['created_at']; ?></td>
+                                    <td><?= $hs['keterangan']; ?></td>
                                 <?php endif; ?>
                             <?php endif; ?>
                         </tr>
