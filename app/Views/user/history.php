@@ -36,9 +36,9 @@
                                     <td><?= $hs['gejala']; ?></td>
                                     <td><?= $hs['penyakit']; ?></td>
                                     <td><?= $hs['created_at']; ?></td>
-                                    <td>
+                                    <td class="d-flex justify-content-center">
                                         <button type="button" class="btn btn-primary tampilModalKeterangan" data-toggle="modal" data-target="#keteranganModal" data-id="<?= $hs['id']; ?>">
-                                        Klik disini
+                                        Lihat
                                         </button>
                                         <!-- Modal -->
                                         <div class="modal fade" id="keteranganModal" tabindex="-1" role="dialog" aria-labelledby="keteranganModalLabel" aria-hidden="true">
@@ -57,7 +57,7 @@
                                                 </h2>
                                                 <div class="card-body">
                                                     <div class="form-group">
-                                                        <textarea class="form-control" id="keterangan" name="keterangan" rows="5"></textarea>
+                                                        <textarea class="form-control" id="keterangan" name="keterangan" rows="8"></textarea>
                                                     </div>
                                                 </div>
                                             </div>
