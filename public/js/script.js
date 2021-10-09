@@ -22,3 +22,24 @@ $(function () {
     });
   });
 });
+$(function () {
+  $('.tampilModalEditProfil').on('click', function () {
+    const id = $(this).data('id');
+    $.ajax({
+      url: 'http://localhost:8080/user/profile/getDataUser',
+      data: { id: id },
+      method: 'post',
+      dataType: 'json',
+      success: function (data) {
+        $('#usernameProfile').val(data.username);
+        $('#nama').val(data.nama);
+        $('#tempat_lahir').val(data.tempat_lahir);
+        $('#tanggal_lahir').val(data.tanggal_lahir);
+        $('#gender').val(data.gender);
+        $('#emailProfile').val(data.email);
+        $('#alamatProfile').val(data.alamat);
+        console.log(data);
+      },
+    });
+  });
+});

@@ -26,7 +26,7 @@
             <li class="nav-item <?= ($title === "Profile") ? 'active' : ''; ?>">
                 <a class="nav-link" href=" <?= base_url('user/profile'); ?>">
                     <i class="fas fa-fw fa-tachometer-alt"></i>
-                    <span>Profil</span>
+                    <span>Profile</span>
                 </a>
             </li>
             <!-- Divider -->

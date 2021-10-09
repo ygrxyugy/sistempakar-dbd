@@ -2,9 +2,6 @@
 
 namespace App\Controllers;
 
-use App\Models\Survey;
-use App\Models\Gejala;
-
 class User extends BaseController
 {
     public function index()
@@ -33,12 +30,28 @@ class User extends BaseController
     {
         $auth = $this->authService();
         $dataUser = $this->auth->user();
-        $data=[
-            'title'=>'Profile',
-            'user' => $dataUser->username
-        ];
+        $dataProfile = $this->profileModel();
 
-        echo view('templates/header', $data);
+        foreach ($dataProfile['profile'] as $profileUser) {
+            if ($profileUser['username']==$dataUser->username) {
+                $data = $profileUser;
+            }
+            else{
+                $data = 'Silahkan update profile terlebih dahulu';
+            }
+        }
+        $send=[
+            'title'=>'Profile',
+            'id' => $dataUser->id,
+            'user' => $data['username'],
+            'email' => $data['email'],
+            'nama' => $data['nama'],
+            'tempat_lahir' => $data['tempat_lahir'],
+            'tanggal_lahir' => $data['tanggal_lahir'],
+            'gender' => $data['gender'],
+            'alamat' => $data['alamat'],
+        ];
+        echo view('templates/header', $send);
         echo view('templates/sidebar-user');
         echo view('templates/topbar');
 
@@ -139,6 +152,24 @@ class User extends BaseController
         return redirect('user/history');
     }
 
+    public function edit(){
+        $cek = $this->request->getVar();
+        $dataProfil = $this->profileModel->findAll();
+        
+        $this->profileModel->save([
+            'username' =>$this->request->getVar('username'),
+            'nama' =>$this->request->getVar('nama'),
+            'tempat_lahir' =>$this->request->getVar('tempat_lahir'),
+            'tanggal_lahir' =>$this->request->getVar('tanggal_lahir'),
+            'gender' =>$this->request->getVar('gender'),
+            'email' =>$this->request->getVar('email'),
+            'alamat' =>$this->request->getVar('alamat'),
+        ]);
+        session()->setFlashdata('msg','Update data profil telah berhasil');
+        return redirect('user/profile');
+
+    }
+
     public function getDataKeterangan(){
         $id =  $_POST['id'];
         $dataHistory = $this->historyModel();
@@ -147,6 +178,27 @@ class User extends BaseController
                 echo json_encode($hs);
             }
         }
-    
+    }
+
+    public function getDataUser(){
+        $id =  $_POST['id'];
+        $auth = $this->authService();
+        $dataUser = $this->auth->user();
+        $dataProfile = $this->profileModel();
+        foreach ($dataProfile['profile'] as $dp) {            
+            $data = [
+                'id' => $dataUser->id,
+                'username' => $dataUser->username,
+                'email' => $dataUser->email,
+                'nama' => $dp['nama'],
+                'tempat_lahir' => $dp['tempat_lahir'],
+                'tanggal_lahir' => $dp['tanggal_lahir'],
+                'gender' => $dp['gender'],
+                'alamat' => $dp['alamat']
+            ];
+        }
+        if ($dataUser->id == $id) {
+            echo json_encode($data);
+        }
     }
 }
