@@ -150,23 +150,23 @@ class User extends BaseController
                     elseif ($cek['gejala3']=='null') {
                         $hasil = $gj['penyakit'];
                         $keterangan = $gj['keterangan'];
-                        $gejalaUser = ($cek['gejala1']. ", " . $cek['gejala2']);
+                        $gejalaUser = ($cek['gejala1']. ", " . $cek['gejala2']. ", " . $cek['gejala4']);
                     }
                 }                    
                 elseif ($cek['gejala2']=='null') {
                     $hasil = $gj['penyakit'];
                     $keterangan = $gj['keterangan'];
-                    $gejalaUser = ($cek['gejala1']);
+                    $gejalaUser = ($cek['gejala1']. ", " . $cek['gejala3'] . ", " . $cek['gejala4']);
                 }
             }
             elseif ($cek['gejala1'] =='null') {
-                $hasil = 'Tidak terindikasi';
-                $keterangan = 'Anda tidak terindikasi penyakit jantung';
-                $gejalaUser = 'Tidak ada';
+                $hasil = $gj['penyakit'];
+                $keterangan = $gj['keterangan'];
+                $gejalaUser = ($cek['gejala2']. ", " . $cek['gejala3'] . ", " . $cek['gejala4']);
             }
             elseif ($hasil=='') {
                 $hasil = 'Tidak Teridentifikasi';
-                $keterangan = 'Penyakit tidak terindentifikasi dalam database kami. Namun, bila sakit berlanjut, harap segera hubungi dokter.';
+                $keterangan = 'Anda tidak terindikasi penyakit jantung atau tidak ada penyakit yang sesuai dalam database kami. Namun, bila sakit berlanjut, harap segera hubungi dokter.';
                 $gejalaUser = ($cek['gejala1']. ", " . $cek['gejala2']. ", " . $cek['gejala3'] . ", " . $cek['gejala4']);
             }
         }
