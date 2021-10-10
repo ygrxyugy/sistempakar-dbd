@@ -17,7 +17,6 @@ $(function () {
       success: function (data) {
         $('#penyakit').val(data.penyakit);
         $('#keterangan').val(data.keterangan);
-        console.log(data);
       },
     });
   });
@@ -38,7 +37,6 @@ $(function () {
         $('#gender').val(data.gender);
         $('#emailProfile').val(data.email);
         $('#alamatProfile').val(data.alamat);
-        console.log(data);
       },
     });
   });
@@ -59,7 +57,6 @@ $(function () {
         $('#genderLihat').val(data.gender);
         $('#emailLihat').val(data.email);
         $('#alamatLihat').val(data.alamat);
-        console.log(data);
       },
     });
   });
