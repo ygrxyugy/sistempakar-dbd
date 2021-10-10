@@ -12,7 +12,7 @@
                     <thead>
                         <tr>
                             <th>No</th>
-                            <th>Nama</th>
+                            <th>Username</th>
                             <th>Gejala</th>
                             <th>Indikasi Penyakit</th>
                             <th>Waktu Pemeriksaan</th>

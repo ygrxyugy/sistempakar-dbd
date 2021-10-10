@@ -72,11 +72,9 @@ class Admin extends BaseController
         $auth = $this->authService();
         $dataUser = $this->auth->user();
         $dataHistory = $this->historyModel();
-        $dataProfile = $this->profileModel();
         $data=[
             'title'=>'Data Pemeriksaan',
             'history' => $dataHistory,
-            'profile' => $dataProfile,
             'user' => $dataUser->username
         ];
 
