@@ -8,13 +8,20 @@ class User extends BaseController
     public function index()
     {
         $auth = $this->authService();
-        $dataUser = $this->auth->user();
+        $dataUser = $this->auth->user()->username;
         $dataGejala = $this->gejala();
-
+        $dataHistory = $this->historyModel->findColumn('nama');
+        $i=0;
+        foreach ($dataHistory as $hs){
+            if($hs == $dataUser){
+                $i++;
+            }
+        }
         $data=[
             'title'=>'User Dashboard',
-            'gejala' => $dataGejala,
-            'user' => $dataUser->username
+            'gejala' => $dataGejala, 
+            'history' => $i,
+            'user' => $dataUser
         ];
 
         echo view('templates/header', $data);
