@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Controllers;
+use App\Models\Profile;
 
 class User extends BaseController
 {
@@ -35,22 +36,33 @@ class User extends BaseController
         foreach ($dataProfile['profile'] as $profileUser) {
             if ($profileUser['username']==$dataUser->username) {
                 $data = $profileUser;
+                $send=[
+                    'title'=>'Profile',
+                    'id' => $dataUser->id,
+                    'user' => $data['username'],
+                    'email' => $data['email'],
+                    'nama' => $data['nama'],
+                    'tempat_lahir' => $data['tempat_lahir'],
+                    'tanggal_lahir' => $data['tanggal_lahir'],
+                    'gender' => $data['gender'],
+                    'alamat' => $data['alamat'],
+                ];        
             }
             else{
-                $data = 'Silahkan update profile terlebih dahulu';
+                $data = 'null';
+                $send=[
+                    'title'=>'Profile',
+                    'id' => $dataUser->id,
+                    'user' => $dataUser->username,
+                    'email' => $dataUser->email,
+                    'nama' => $data,
+                    'tempat_lahir' => $data,
+                    'tanggal_lahir' => $data,
+                    'gender' => $data,
+                    'alamat' => $data,
+                ];        
             }
         }
-        $send=[
-            'title'=>'Profile',
-            'id' => $dataUser->id,
-            'user' => $data['username'],
-            'email' => $data['email'],
-            'nama' => $data['nama'],
-            'tempat_lahir' => $data['tempat_lahir'],
-            'tanggal_lahir' => $data['tanggal_lahir'],
-            'gender' => $data['gender'],
-            'alamat' => $data['alamat'],
-        ];
         echo view('templates/header', $send);
         echo view('templates/sidebar-user');
         echo view('templates/topbar');
@@ -63,22 +75,31 @@ class User extends BaseController
     public function survey()
     {
         $auth = $this->authService();
-        $dataUser = $this->auth->user();
+        $dataUser = $this->auth->user()->username;
         $dataGejala = $this->gejala();
+        $profileModel = new Profile();
+        $dataProfile = $profileModel->findColumn('username');
         $data=[
             'title'=>'Cek Kesehatan',
             'gejala' => $dataGejala,
-            'user' => $dataUser->username
+            'user' => $dataUser
         ];
-
-        echo view('templates/header', $data);
-        echo view('templates/sidebar-user');
-        echo view('templates/topbar');
-
-        echo view('user/survey');
-        
-        echo view('templates/footer');
+        foreach ($dataProfile as $profileUser) {
+            $loop =  $profileUser;
+        }
+        if ($loop==$dataUser) {
+            echo view('templates/header', $data);
+            echo view('templates/sidebar-user');
+            echo view('templates/topbar');
+            echo view('user/survey');
+            echo view('templates/footer');
+        }
+        else{
+            session()->setFlashdata('msg','Silahkan lengkapi data profile terlebih dahulu');
+            return redirect('user/profile');
+        }
     }
+
     public function history()
     {
         $auth = $this->authService();
@@ -154,17 +175,35 @@ class User extends BaseController
 
     public function edit(){
         $cek = $this->request->getVar();
-        $dataProfil = $this->profileModel->findAll();
-        
-        $this->profileModel->save([
-            'username' =>$this->request->getVar('username'),
-            'nama' =>$this->request->getVar('nama'),
-            'tempat_lahir' =>$this->request->getVar('tempat_lahir'),
-            'tanggal_lahir' =>$this->request->getVar('tanggal_lahir'),
-            'gender' =>$this->request->getVar('gender'),
-            'email' =>$this->request->getVar('email'),
-            'alamat' =>$this->request->getVar('alamat'),
-        ]);
+        $username = $this->request->getVar('username');
+        $dataProfil = $this->profileModel->find();    
+        foreach ($dataProfil as $profileUser) {
+            $loop = $profileUser['username'];
+        }
+        if ($loop == $username) {
+            $id = $profileUser['id'];
+            $this->profileModel->update($id, [
+                'username' =>$this->request->getVar('username'),
+                'nama' =>$this->request->getVar('nama'),
+                'tempat_lahir' =>$this->request->getVar('tempat_lahir'),
+                'tanggal_lahir' =>$this->request->getVar('tanggal_lahir'),
+                'gender' =>$this->request->getVar('gender'),
+                'email' =>$this->request->getVar('email'),
+                'alamat' =>$this->request->getVar('alamat'),
+            ]);
+        }  
+        else {
+            $this->profileModel->save([
+                'username' =>$this->request->getVar('username'),
+                'nama' =>$this->request->getVar('nama'),
+                'tempat_lahir' =>$this->request->getVar('tempat_lahir'),
+                'tanggal_lahir' =>$this->request->getVar('tanggal_lahir'),
+                'gender' =>$this->request->getVar('gender'),
+                'email' =>$this->request->getVar('email'),
+                'alamat' =>$this->request->getVar('alamat'),
+            ]);
+        }
+
         session()->setFlashdata('msg','Update data profil telah berhasil');
         return redirect('user/profile');
 
@@ -184,21 +223,30 @@ class User extends BaseController
         $id =  $_POST['id'];
         $auth = $this->authService();
         $dataUser = $this->auth->user();
-        $dataProfile = $this->profileModel();
-        foreach ($dataProfile['profile'] as $dp) {            
-            $data = [
-                'id' => $dataUser->id,
-                'username' => $dataUser->username,
-                'email' => $dataUser->email,
-                'nama' => $dp['nama'],
-                'tempat_lahir' => $dp['tempat_lahir'],
-                'tanggal_lahir' => $dp['tanggal_lahir'],
-                'gender' => $dp['gender'],
-                'alamat' => $dp['alamat']
-            ];
+        $profileModel = new Profile();
+        foreach ($profileModel->find() as $profileUser) {            
+            if ($profileUser['username'] == $dataUser->username) {
+                $data = [
+                    'id' => $dataUser->id,
+                    'username' => $dataUser->username,
+                    'email' => $dataUser->email,
+                    'nama' => $profileUser['nama'],
+                    'tempat_lahir' => $profileUser['tempat_lahir'],
+                    'tanggal_lahir' => $profileUser['tanggal_lahir'],
+                    'gender' => $profileUser['gender'],
+                    'alamat' => $profileUser['alamat']
+                ];
+            }  
+            else{
+                $data = [
+                    'id' => $dataUser->id,
+                    'username' => $dataUser->username,
+                    'email' => $dataUser->email,
+                ];    
+            }
         }
-        if ($dataUser->id == $id) {
-            echo json_encode($data);
+        if ($dataUser->id == $id ) {
+            echo json_encode($data);  
         }
     }
 }
