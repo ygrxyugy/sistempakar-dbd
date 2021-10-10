@@ -31,8 +31,9 @@ class User extends BaseController
     {
         $auth = $this->authService();
         $dataUser = $this->auth->user();
-        $dataProfile = $this->profileModel();
+        $dataProfile = $this->profileModel->find();
 
+// dd($this->profileModel->find());
         foreach ($dataProfile['profile'] as $profileUser) {
             if ($profileUser['username']==$dataUser->username) {
                 $data = $profileUser;

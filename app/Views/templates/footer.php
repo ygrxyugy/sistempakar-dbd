@@ -121,6 +121,55 @@
                     </div>
                 </div>
             </div>
+            <!-- Lihat Profil Modal -->
+            <div class="modal fade" id="lihatProfilModal" tabindex="-1" role="dialog" aria-labelledby="lihatProfilModalLabel" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="lihatProfilModalLabel">Data Profil Pengguna</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <form action="/user/profile/edit" method="POST">
+                            <?= csrf_field(); ?>
+                            <div class="form-group">
+                                <label for="usernameLihat">Username</label>
+                                <input type="text" class="form-control" id="usernameLihat" name="username" readonly>
+                            </div>
+                            <div class="form-group">
+                                <label for="namaLihat">Nama</label>
+                                <input type="text" class="form-control" id="namaLihat" name="nama" readonly>
+                            </div>
+                            <div class="form-group">
+                                <label for="tempat_lahirLihat">Tempat, Tanggal Lahir</label>
+                                <input type="text" class="form-control" id="tempat_lahirLihat" name="tempat_lahir" readonly> 
+                                <input type="date" class="form-control" id="tanggal_lahirLihat" name="tanggal_lahir" readonly>
+                            </div>
+                            <div class="form-group">
+                                <label for="genderLihat">Jenis Kelamin</label>
+                                <select class="form-control" name="gender" id="genderLihat" readonly>
+                                    <option value="Pria">Pria</option>
+                                    <option value="Wanita">Wanita</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="emailLihat">Email</label>
+                                <input type="text" class="form-control" id="emailLihat" name="email" readonly>
+                            </div>
+                            <div class="form-group">
+                                <label for="alamatLihat">Alamat</label>
+                                <input type="text" class="form-control" id="alamatLihat" name="alamat" readonly>
+                            </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
 
             <!-- Bootstrap core JavaScript-->
             <script src="/vendor/jquery/jquery.min.js"></script>

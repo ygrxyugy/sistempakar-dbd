@@ -42,6 +42,7 @@ $routes->get('admin/data-gejala', 'Admin::dataGejala', ['filter' => 'role:admin'
 $routes->get('admin/history', 'Admin::history', ['filter' => 'role:admin']);
 $routes->get('admin/tambah-data-gejala', 'Admin::tambahGejala', ['filter' => 'role:admin']);
 $routes->post('admin/tambah-data-gejala/save', 'Admin::saveTambahGejala', ['filter' => 'role:admin']);
+$routes->post('admin/history/getDataUser', 'Admin::getDataUser', ['filter' => 'role:admin']);
 
 $routes->get('user', 'User::index', ['filter' => 'role:member']);
 $routes->get('user/profile', 'User::profile', ['filter' => 'role:member']);

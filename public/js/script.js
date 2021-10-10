@@ -43,3 +43,24 @@ $(function () {
     });
   });
 });
+$(function () {
+  $('.tampilModalLihatProfil').on('click', function () {
+    const id = $(this).data('id');
+    $.ajax({
+      url: 'http://localhost:8080/admin/history/getDataUser',
+      data: { id: id },
+      method: 'post',
+      dataType: 'json',
+      success: function (data) {
+        $('#usernameLihat').val(data.username);
+        $('#namaLihat').val(data.nama);
+        $('#tempat_lahirLihat').val(data.tempat_lahir);
+        $('#tanggal_lahirLihat').val(data.tanggal_lahir);
+        $('#genderLihat').val(data.gender);
+        $('#emailLihat').val(data.email);
+        $('#alamatLihat').val(data.alamat);
+        console.log(data);
+      },
+    });
+  });
+});

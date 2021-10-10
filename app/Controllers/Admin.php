@@ -2,6 +2,8 @@
 
 namespace App\Controllers;
 use App\Models\User;
+use App\Models\Profile;
+use App\Controllers\BaseController;
 
 class Admin extends BaseController
 {
@@ -70,9 +72,11 @@ class Admin extends BaseController
         $auth = $this->authService();
         $dataUser = $this->auth->user();
         $dataHistory = $this->historyModel();
+        $dataProfile = $this->profileModel();
         $data=[
             'title'=>'Data Pemeriksaan',
             'history' => $dataHistory,
+            'profile' => $dataProfile,
             'user' => $dataUser->username
         ];
 
@@ -102,5 +106,22 @@ class Admin extends BaseController
         $dataGejala = $this->gejalaModel->insert($data);
         session()->setFlashdata('msg','Tambah data gejala berhasil');
         return redirect('admin/data-gejala');
+    }
+        
+    public function getDataUser(){
+        $id =  $_POST['id'];
+        $dataHistory = $this->historyModel();
+        foreach ($dataHistory['history'] as $hs) {
+            if ($hs['id'] == $id) {
+                $username = $hs['nama'];
+                if ($username = $hs['nama']) {  
+                    foreach ($this->profileModel->find() as $key) {
+                        if ($key['username']==$username) {
+                            echo json_encode($key); 
+                        }
+                    }                
+                }
+            }
+        }
     }
 }
