@@ -1,26 +1,28 @@
 <?php
 
 namespace App\Controllers;
+
 use App\Models\User;
+use Myth\Auth\Models\UserModel;
 
 class Admin extends BaseController
 {
     public function index()
     {
-        $user = new User;
+        $user = new UserModel();
 
         $dataHistory = $this->historyModel();
         $dataGejala = $this->gejala();
         $auth = $this->authService();
         $dataUser = $this->auth->user();
         $AllUser = $user->findAll();
-        $data=[
-            'title'=>'Admin Dashboard',
+        $data = [
+            'title' => 'Admin Dashboard',
             'gejala' => $dataGejala,
             'history' => $dataHistory,
             'AllUser' => $AllUser,
             'user' => $dataUser->username
-        ];   
+        ];
         echo view('templates/header', $data);
         echo view('templates/sidebar-admin');
         echo view('templates/topbar');
@@ -31,21 +33,21 @@ class Admin extends BaseController
 
     public function dataUser()
     {
-        $user = new User;
+        $user = new UserModel();
         $auth = $this->authService();
         $dataUser = $this->auth->user();
         $AllUser = $user->findAll();
-        $data=[
-            'title'=>'Data Pengguna',
+        $data = [
+            'title' => 'Data Pengguna',
             'user' => $dataUser->username,
-            'AllUser' => $AllUser 
+            'AllUser' => $AllUser
         ];
         echo view('templates/header', $data);
         echo view('templates/sidebar-admin');
         echo view('templates/topbar');
 
         echo view('admin/data-user');
-        
+
         echo view('templates/footer');
     }
 
@@ -54,15 +56,15 @@ class Admin extends BaseController
         $auth = $this->authService();
         $dataUser = $this->auth->user();
         $dataGejala = $this->gejala();
-        $data=[
-            'title'=>'Data Gejala',
+        $data = [
+            'title' => 'Data Gejala',
             'gejala' => $dataGejala,
             'user' => $dataUser->username
         ];
         echo view('templates/header', $data);
         echo view('templates/sidebar-admin');
         echo view('templates/topbar');
-        echo view('admin/data-gejala');     
+        echo view('admin/data-gejala');
         echo view('templates/footer');
     }
     public function history()
@@ -70,8 +72,8 @@ class Admin extends BaseController
         $auth = $this->authService();
         $dataUser = $this->auth->user();
         $dataHistory = $this->historyModel();
-        $data=[
-            'title'=>'Data Pemeriksaan',
+        $data = [
+            'title' => 'Data Pemeriksaan',
             'history' => $dataHistory,
             'user' => $dataUser->username
         ];
@@ -79,7 +81,7 @@ class Admin extends BaseController
         echo view('templates/header', $data);
         echo view('templates/sidebar-admin');
         echo view('templates/topbar');
-        echo view('admin/history-admin');    
+        echo view('admin/history-admin');
         echo view('templates/footer');
     }
 }
