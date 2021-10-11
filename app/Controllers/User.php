@@ -38,39 +38,49 @@ class User extends BaseController
     {
         $auth = $this->authService();
         $dataUser = $this->auth->user();
-        $dataProfile = $this->profileModel();
 
-        foreach ($dataProfile['profile'] as $profileUser) {
-            if ($profileUser['username']==$dataUser->username) {
-                $data = $profileUser;
-                $send=[
-                    'title'=>'Profile',
-                    'id' => $dataUser->id,
-                    'user' => $data['username'],
-                    'email' => $data['email'],
-                    'nama' => $data['nama'],
-                    'tempat_lahir' => $data['tempat_lahir'],
-                    'tanggal_lahir' => $data['tanggal_lahir'],
-                    'gender' => $data['gender'],
-                    'alamat' => $data['alamat'],
-                ];        
-            }
-            else{
-                $data = 'null';
-                $send=[
-                    'title'=>'Profile',
-                    'id' => $dataUser->id,
-                    'user' => $dataUser->username,
-                    'email' => $dataUser->email,
-                    'nama' => $data,
-                    'tempat_lahir' => $data,
-                    'tanggal_lahir' => $data,
-                    'gender' => $data,
-                    'alamat' => $data,
-                ];        
+        // Get data profil user
+        $profileModel = $this->profileModel;
+        $usernameTable = $this->profileModel->findColumn('username');
+        foreach ($usernameTable as $un_Table) {            
+            if ($un_Table = $dataUser->username) {
+                foreach ($profileModel->findAll() as $findUser) {
+                    if ($findUser['username'] == $dataUser->username) {
+                        $dataProfile = $findUser;
+                    }
+                }
             }
         }
-        echo view('templates/header', $send);
+
+        if (isset($dataProfile)) {
+            $data=[
+                'title'=>'Profile',
+                'id' => $dataProfile['id'],
+                'user' => $dataProfile['username'],
+                'email' => $dataProfile['email'],
+                'nama' => $dataProfile['nama'],
+                'tempat_lahir' => $dataProfile['tempat_lahir'],
+                'tanggal_lahir' => $dataProfile['tanggal_lahir'],
+                'gender' => $dataProfile['gender'],
+                'alamat' => $dataProfile['alamat'],
+            ]; 
+        }        
+        elseif (!isset($dataProfile)) {
+            $msg = 'null';
+            $data=[
+                'title'=>'Profile',
+                'id' => $dataUser->id,
+                'user' => $dataUser->username,
+                'email' => $dataUser->email,
+                'nama' => $msg,
+                'tempat_lahir' => $msg,
+                'tanggal_lahir' => $msg,
+                'gender' => $msg,
+                'alamat' => $msg,
+            ]; 
+        }        
+
+        echo view('templates/header', $data);
         echo view('templates/sidebar-user');
         echo view('templates/topbar');
 
@@ -84,24 +94,32 @@ class User extends BaseController
         $auth = $this->authService();
         $dataUser = $this->auth->user()->username;
         $dataGejala = $this->gejala();
-        $profileModel = new Profile();
-        $dataProfile = $profileModel->findColumn('username');
+
+        // Get data profil user
+        $profileModel = $this->profileModel;
+        $usernameTable = $this->profileModel->findColumn('username');
+        foreach ($usernameTable as $un_Table) {            
+            if ($un_Table = $dataUser) {
+                foreach ($profileModel->findAll() as $findUser) {
+                    if ($findUser['username'] == $dataUser) {
+                        $dataProfile = $findUser;
+                    }
+                }
+            }
+        }
         $data=[
             'title'=>'Cek Kesehatan',
             'gejala' => $dataGejala,
             'user' => $dataUser
         ];
-        foreach ($dataProfile as $profileUser) {
-            $loop =  $profileUser;
-        }
-        if ($loop==$dataUser) {
+        if (isset($dataProfile)) {
             echo view('templates/header', $data);
             echo view('templates/sidebar-user');
             echo view('templates/topbar');
             echo view('user/survey');
             echo view('templates/footer');
         }
-        else{
+        if (!isset($dataProfile)){
             session()->setFlashdata('msg','Silahkan lengkapi data profile terlebih dahulu');
             return redirect('user/profile');
         }
@@ -183,7 +201,7 @@ class User extends BaseController
     public function edit(){
         $cek = $this->request->getVar();
         $username = $this->request->getVar('username');
-        $dataProfil = $this->profileModel->find();    
+        $dataProfil = $this->profileModel->find();
         foreach ($dataProfil as $profileUser) {
             $loop = $profileUser['username'];
         }
@@ -230,30 +248,29 @@ class User extends BaseController
         $id =  $_POST['id'];
         $auth = $this->authService();
         $dataUser = $this->auth->user();
-        $profileModel = new Profile();
-        foreach ($profileModel->find() as $profileUser) {            
-            if ($profileUser['username'] == $dataUser->username) {
-                $data = [
-                    'id' => $dataUser->id,
-                    'username' => $dataUser->username,
-                    'email' => $dataUser->email,
-                    'nama' => $profileUser['nama'],
-                    'tempat_lahir' => $profileUser['tempat_lahir'],
-                    'tanggal_lahir' => $profileUser['tanggal_lahir'],
-                    'gender' => $profileUser['gender'],
-                    'alamat' => $profileUser['alamat']
-                ];
-            }  
-            else{
-                $data = [
-                    'id' => $dataUser->id,
-                    'username' => $dataUser->username,
-                    'email' => $dataUser->email,
-                ];    
+
+        // Get data profil user
+        $profileModel = $this->profileModel;
+        $usernameTable = $this->profileModel->findColumn('username');
+        foreach ($usernameTable as $un_Table) {            
+            if ($un_Table = $dataUser->username) {
+                foreach ($profileModel->findAll() as $findUser) {
+                    if ($findUser['username'] == $dataUser->username) {
+                        $dataProfile = $findUser;
+                    }
+                }
             }
         }
-        if ($dataUser->id == $id ) {
-            echo json_encode($data);  
+        if (isset($dataProfile)) {
+            echo json_encode($dataProfile);
+        }
+        if (!isset($dataProfile)) {
+            $data = [
+                'id' => $dataUser->id,
+                'username' => $dataUser->username,
+                'email' => $dataUser->email,
+            ];   
+            echo json_encode($data);
         }
     }
 }
