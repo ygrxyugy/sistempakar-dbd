@@ -23,6 +23,7 @@
                             <th>Gejala</th>
                             <th>Indikasi Penyakit</th>
                             <th>Waktu Pemeriksaan</th>
+                            <th>Keterangan Penyakit</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -35,6 +36,11 @@
                                     <td><?= $hs['gejala']; ?></td>
                                     <td><?= $hs['penyakit']; ?></td>
                                     <td><?= $hs['created_at']; ?></td>
+                                    <td class="d-flex justify-content-center">
+                                        <button type="button" class="btn btn-primary tampilModalKeterangan" data-toggle="modal" data-target="#keteranganModal" data-id="<?= $hs['id']; ?>">
+                                        Lihat
+                                        </button>
+                                    </td>
                                 <?php endif; ?>
                             <?php endif; ?>
                         </tr>
@@ -47,3 +53,5 @@
 
 </div>
 <!-- /.container-fluid -->
+
+<!-- Button trigger modal -->

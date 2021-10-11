@@ -12,10 +12,11 @@
                     <thead>
                         <tr>
                             <th>No</th>
-                            <th>Nama</th>
+                            <th>Username</th>
                             <th>Gejala</th>
                             <th>Indikasi Penyakit</th>
                             <th>Waktu Pemeriksaan</th>
+                            <th>Data Pengguna</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -28,6 +29,11 @@
                                 <td><?= $hs['gejala']; ?></td>
                                 <td><?= $hs['penyakit']; ?></td>
                                 <td><?= $hs['created_at']; ?></td>
+                                <td class="d-flex justify-content-center">
+                                    <button type="button" class="btn btn-primary tampilModalLihatProfil" data-toggle="modal" data-target="#lihatProfilModal" data-id="<?= $hs['id']; ?>">
+                                    Lihat
+                                    </button>
+                                </td>
                             <?php endif; ?>
                         </tr>
                         <?php endforeach; ?>         

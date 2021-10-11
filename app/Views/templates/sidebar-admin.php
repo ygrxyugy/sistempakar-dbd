@@ -24,16 +24,9 @@
 
             <!-- Data Pengguna -->
             <li class="nav-item <?= ($title === "Data Pengguna") ? 'active' : '' ; ?>">
-                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
+                <a class="nav-link" href="<?= base_url('admin/data-user');?>">
                     <i class="fas fa-fw fa-users"></i>
-                    <span>Data Pengguna</span>
-                </a>
-                <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
-                    <div class="bg-white py-2 collapse-inner rounded">
-                        <a class="collapse-item" href="#">Tambah Pengguna Baru</a>
-                        <a class="collapse-item" href="<?= base_url('admin/data-user');?>">Daftar Pengguna</a>
-                    </div>
-                </div>
+                    <span>Data Pengguna</span></a>
             </li>
             
             <!-- Divider -->
@@ -47,7 +40,7 @@
                 </a>
                 <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
-                        <a class="collapse-item" href="#">Tambah Gejala Baru</a>
+                        <a class="collapse-item" href="<?= base_url('admin/tambah-data-gejala');?>">Tambah Gejala Baru</a>
                         <a class="collapse-item" href="<?= base_url('admin/data-gejala');?>">Daftar Gejala</a>
                     </div>
                 </div>

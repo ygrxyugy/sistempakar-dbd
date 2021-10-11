@@ -7,7 +7,7 @@ class Home extends BaseController
     public function index()
     {
         $data = [
-            'title' => 'Home | Sistem Pakar DBD'
+            'title' => 'Home | Heartnalyze'
         ];
 
         echo view('templates/header', $data);
