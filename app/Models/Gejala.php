@@ -14,7 +14,7 @@ class Gejala extends Model
     protected $returnType           = 'array';
     protected $useSoftDeletes       = false;
     protected $protectFields        = true;
-    protected $allowedFields        = [];
+    protected $allowedFields        = ['penyakit','gejala1','gejala2','gejala3','gejala4','keterangan'];
 
     // Dates
     protected $useTimestamps        = false;

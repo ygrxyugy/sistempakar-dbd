@@ -4,10 +4,10 @@ namespace App\Models;
 
 use CodeIgniter\Model;
 
-class Survey extends Model
+class User extends Model
 {
     protected $DBGroup              = 'default';
-    protected $table                = 'survey';
+    protected $table                = 'users';
     protected $primaryKey           = 'id';
     protected $useAutoIncrement     = true;
     protected $insertID             = 0;

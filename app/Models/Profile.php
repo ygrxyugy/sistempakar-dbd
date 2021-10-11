@@ -4,17 +4,17 @@ namespace App\Models;
 
 use CodeIgniter\Model;
 
-class History extends Model
+class Profile extends Model
 {
     protected $DBGroup              = 'default';
-    protected $table                = 'data_history';
+    protected $table                = 'data_profil';
     protected $primaryKey           = 'id';
     protected $useAutoIncrement     = true;
     protected $insertID             = 0;
     protected $returnType           = 'array';
     protected $useSoftDeletes       = false;
     protected $protectFields        = true;
-    protected $allowedFields        = ['nama','gejala','penyakit','keterangan'];
+    protected $allowedFields        = ['username', 'nama', 'tempat_lahir', 'tanggal_lahir', 'gender', 'email', 'alamat'];
 
     // Dates
     protected $useTimestamps        = false;

@@ -47,7 +47,7 @@
                 </a>
                 <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
-                        <a class="collapse-item" href="#">Tambah Gejala Baru</a>
+                        <a class="collapse-item" href="<?= base_url('admin/tambah-data-gejala'); ?>">Tambah Gejala Baru</a>
                         <a class="collapse-item" href="<?= base_url('admin/data-gejala'); ?>">Daftar Gejala</a>
                     </div>
                 </div>

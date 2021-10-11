@@ -4,6 +4,8 @@ namespace App\Controllers;
 
 use App\Models\User;
 use Myth\Auth\Models\UserModel;
+use App\Models\Profile;
+use App\Controllers\BaseController;
 
 class Admin extends BaseController
 {
@@ -83,5 +85,45 @@ class Admin extends BaseController
         echo view('templates/topbar');
         echo view('admin/history-admin');
         echo view('templates/footer');
+    }
+    public function tambahGejala()
+    {
+        $auth = $this->authService();
+        $dataUser = $this->auth->user();
+
+        $data = [
+            'title' => 'Tambah Data Gejala',
+            'user' => $dataUser->username
+        ];
+        echo view('templates/header', $data);
+        echo view('templates/sidebar-admin');
+        echo view('templates/topbar');
+        echo view('admin/tambah-gejala');
+        echo view('templates/footer');
+    }
+    public function saveTambahGejala()
+    {
+        $data = $this->request->getVar();
+        $dataGejala = $this->gejalaModel->insert($data);
+        session()->setFlashdata('msg', 'Tambah data gejala berhasil');
+        return redirect('admin/data-gejala');
+    }
+
+    public function getDataUser()
+    {
+        $id =  $_POST['id'];
+        $dataHistory = $this->historyModel();
+        foreach ($dataHistory['history'] as $hs) {
+            if ($hs['id'] == $id) {
+                $username = $hs['nama'];
+                if ($username = $hs['nama']) {
+                    foreach ($this->profileModel->find() as $key) {
+                        if ($key['username'] == $username) {
+                            echo json_encode($key);
+                        }
+                    }
+                }
+            }
+        }
     }
 }
