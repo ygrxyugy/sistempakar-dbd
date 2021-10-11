@@ -24,15 +24,15 @@
                         <tr>
                             <?php if(!empty($all)): ?>
                                 <td><?= $i++;; ?></td>
-                                <td><?= $all['username']; ?></td>
-                                <td><?= $all['email']; ?></td>
-                                <?php if($all['active']==1): ?>
+                                <td><?= $all->username; ?></td>
+                                <td><?= $all->email; ?></td>
+                                <?php if($all->active==1): ?>
                                     <td>Aktif</td>
                                 <?php endif; ?>
-                                <?php if($all['active']==0): ?>
+                                <?php if($all->active==0): ?>
                                     <td>Nonaktif</td>
                                 <?php endif; ?>
-                                <td><?= $all['created_at']; ?></td>
+                                <td><?= $all->created_at; ?></td>
                             <?php endif; ?>
                         </tr>
                         <?php endforeach; ?>    
