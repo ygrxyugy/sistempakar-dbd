@@ -214,8 +214,7 @@ class User extends BaseController
                 }
             }
         }
-        
-        if ($dataProfile['username'] == $username) {
+        if (isset($dataProfile)) {
             $id = $dataProfile['id'];
             $this->profileModel->update($id, [
                 'username' =>$this->request->getVar('username'),
@@ -227,7 +226,7 @@ class User extends BaseController
                 'alamat' =>$this->request->getVar('alamat'),
             ]);
         }  
-        else {
+        elseif (!isset($dataProfile)) {
             $this->profileModel->save([
                 'username' =>$this->request->getVar('username'),
                 'nama' =>$this->request->getVar('nama'),
