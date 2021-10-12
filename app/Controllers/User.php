@@ -201,12 +201,22 @@ class User extends BaseController
     public function edit(){
         $cek = $this->request->getVar();
         $username = $this->request->getVar('username');
-        $dataProfil = $this->profileModel->find();
-        foreach ($dataProfil as $profileUser) {
-            $loop = $profileUser['username'];
+        
+        // Get data profil user
+        $profileModel = $this->profileModel;
+        $usernameTable = $this->profileModel->findColumn('username');
+        foreach ($usernameTable as $un_Table) {            
+            if ($un_Table = $username) {
+                foreach ($profileModel->findAll() as $findUser) {
+                    if ($findUser['username'] == $username) {
+                        $dataProfile = $findUser;
+                    }
+                }
+            }
         }
-        if ($loop == $username) {
-            $id = $profileUser['id'];
+        
+        if ($dataProfile['username'] == $username) {
+            $id = $dataProfile['id'];
             $this->profileModel->update($id, [
                 'username' =>$this->request->getVar('username'),
                 'nama' =>$this->request->getVar('nama'),
