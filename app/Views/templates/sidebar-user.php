@@ -4,7 +4,7 @@
             <!-- Sidebar - Brand -->
             <a class="sidebar-brand d-flex align-items-center justify-content-center" href="<?= base_url('/'); ?>">
                 <div class="sidebar-brand-icon">
-                    <img src="/img/logo.jpeg" style="width: 40px; border-radius: 15%;">
+                    <img src="/img/logo heartnalyze.svg" style="width: 65px; border-radius: 15%;">
                 </div>
                 <div class="sidebar-brand-text mx-2"> Heartnalyze </div>
             </a>
