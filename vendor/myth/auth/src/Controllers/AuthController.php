@@ -119,7 +119,7 @@ class AuthController extends Controller
 			$this->auth->logout();
 		}
 
-		return redirect()->to(site_url('login'));
+		return redirect()->to(site_url('/'));
 	}
 
 	//--------------------------------------------------------------------
